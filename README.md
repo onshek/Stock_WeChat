@@ -1,4 +1,4 @@
-# Stosk_WeChat
+# Stock_WeChat
 
 
 This package supports only Python 3.x.
