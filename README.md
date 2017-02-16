@@ -1,5 +1,6 @@
 # Stock_WeChat
 
+微信股价预警提示
 
 This package supports only Python 3.x.
 
