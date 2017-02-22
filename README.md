@@ -30,10 +30,6 @@ This package supports only Python 3.x.
     14:06:36
     000002 的当前价格为 20.92
     价格正常
-    ^C
-    Stock_WeChat 已执行完毕！
-    更多有意思的小玩意，请戳---->
-    [https://github.com/ipreacher/tricks]
 
 ### 开启提醒模式
 * 每 3 秒获取一次股价
@@ -44,10 +40,6 @@ This package supports only Python 3.x.
     14:07:01
     000002 的当前价格为 20.92
     低于最低预警价格
-    ^C
-    Stock_WeChat 已执行完毕！
-    更多有意思的小玩意，请戳---->
-    [https://github.com/ipreacher/tricks]
 
 
 ## Comments
