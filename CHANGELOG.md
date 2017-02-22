@@ -3,3 +3,7 @@
 0.0.4
 * 2017-02-16
 * Initial release
+
+0.0.5
+* 2017-02-22
+* Add functions

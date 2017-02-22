@@ -11,35 +11,43 @@ This package supports only Python 3.x.
 
 ## How to Use
 
-    from Stock_WeChat import reminder
+### 登陆个人微信
 
-The result is:
-
-	请输入股票代码 
-	>  000002
-	请输入最低预警价格 
-	>  20
-	请输入最高预警价格 
-	>  21
-
-Then:
-
-	reminder.run_task()
-
-The result is:
-
+	>>> from Stock_WeChat import sw
+	>>> sw.login()
 	Getting uuid of QR code.
 	Downloading QR code.
 	Please scan the QR code to log in.
 	Please press confirm on your phone.
 	Login successfully as ipreacher
-	12:06:40
-	000002 的当前价格为 20.62
 
 
-## More Information
+### 开启推送模式
+* 每 3 秒推送一次
+* 关键词：'股票代码', 最低预警价格, 最高预警价格
 
-[Stock_WeChat 上线啦](https://ipreacher.github.io/2017/pip/)
+	>>> sw.push('000002', 20, 21)
+	14:06:36
+	000002 的当前价格为 20.92
+	价格正常
+	^C
+	Stock_WeChat 已执行完毕！
+	更多有意思的小玩意，请戳---->
+	[https://github.com/ipreacher/tricks]
+
+### 开启提醒模式
+* 每 3 秒获取一次股价
+* 如果超过预警价格则发送信息至微信
+* 关键词：'股票代码', 最低预警价格, 最高预警价格
+
+	>>> sw.remind('000002', 21, 22)
+	14:07:01
+	000002 的当前价格为 20.92
+	低于最低预警价格
+	^C
+	Stock_WeChat 已执行完毕！
+	更多有意思的小玩意，请戳---->
+	[https://github.com/ipreacher/tricks]
 
 
 ## Comments

@@ -5,16 +5,16 @@
 # File Name: setup.py
 # Author: ipreacher
 # Mail: ipreacher@hotmail.com
-# Created Time:  2017-02-16 09:43:34 AM
+# Created Time:  2017-02-22 13:25:34 AM
 #############################################
 
 from setuptools import setup, find_packages
 
 setup(
     name = 'Stock_WeChat',
-    version = '0.0.4',
-    keywords = ('test', 'stock', 'WeChat'),
-    description = 'just a simple test',
+    version = '0.0.9',
+    keywords = ('stock', 'WeChat'),
+    description = 'Set up WeChat reminder of a targeted stock',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
