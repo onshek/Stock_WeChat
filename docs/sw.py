@@ -6,43 +6,79 @@ __author__ = 'ipreacher'
 
 import itchat
 import datetime
-import time as t
+import time 
 import tushare as ts
 
-
-stock_symbol = str()
-price_low = float()
-price_high = float()
-
-
-# 登陆微信
+# 自动登陆微信
 def login():
     itchat.auto_login()
 
 
-# 每 3 秒推送一次
-def push(stock_symbol, price_low, price_high):
-    while True:   
-        try:   
-            time = datetime.datetime.now()    # 获取当前时间
-            now = time.strftime('%H:%M:%S') 
-            data = ts.get_realtime_quotes(stock_symbol)    # 获取股票信息
-            r1 = float(data['price'])
-            r2 = str(stock_symbol) + ' 的当前价格为 ' + str(r1)
-            content = now + '\n' + r2
-            itchat.send(content, toUserName='filehelper')
-            print(content)
-            # 判断并发送预警信息
-            if r1 <= float(price_low):
-                itchat.send('低于最低预警价格', toUserName='filehelper')
-                print('低于最低预警价格')
-            elif r1 >= float(price_high):
-                itchat.send('高于最高预警价格', toUserName='filehelper')
-                print('高于最高预警价格')
-            else:
-                itchat.send('价格正常', toUserName='filehelper')
-                print('价格正常')
-            t.sleep(2.9)
+def handle(all_list = []):
+    stock_symbol_list = []
+    price_low_list = []
+    price_high_list = []
+    for i in range(int(len(all_list) / 3)):
+        stock_symbol_list.append(all_list[3 * i])
+        price_low_list.append(all_list[3 * i + 1])
+        price_high_list.append(all_list[3 * i + 2])
+    return stock_symbol_list, price_low_list, price_high_list
+
+
+def get_push(all_list = []):
+    stock_symbol_list, price_low_list, price_high_list = handle(all_list)
+    localtime = datetime.datetime.now()    # 获取当前时间
+    now = localtime.strftime('%H:%M:%S')
+    data = ts.get_realtime_quotes(stock_symbol_list)    # 获取股票信息
+    price_list = data['price']
+    itchat.send(now, toUserName='filehelper')
+    print(now)
+
+    for i in range(int(len(all_list) / 3)):
+        content = stock_symbol_list[i] + ' 当前价格为 ' + price_list[i] + '\n'
+        if float(price_list[i]) <=  float(price_low_list[i]):
+            itchat.send(content + '低于最低预警价格', toUserName='filehelper')
+            print(content + '低于最低预警价格')
+        elif float(price_list[i]) >=  float(price_high_list[i]):
+            itchat.send(content + '高于最高预警价格', toUserName='filehelper')
+            print(content + '高于最高预警价格')
+        else:
+            itchat.send(content + '价格正常', toUserName='filehelper')
+            print(content + '价格正常')
+    itchat.send('***** end *****', toUserName='filehelper')
+    print('***** end *****\n')
+
+
+def get_remind(all_list = []):
+    stock_symbol_list, price_low_list, price_high_list = handle(all_list)
+    localtime = datetime.datetime.now()    # 获取当前时间
+    now = localtime.strftime('%H:%M:%S')
+    data = ts.get_realtime_quotes(stock_symbol_list)    # 获取股票信息
+    price_list = data['price']
+    itchat.send(now, toUserName='filehelper')
+    print(now)
+
+    for i in range(int(len(all_list) / 3)):
+        content = stock_symbol_list[i] + ' 当前价格为 ' + price_list[i] + '\n'
+        if float(price_list[i]) <=  float(price_low_list[i]):
+            itchat.send(content + '低于最低预警价格', toUserName='filehelper')
+            print(content + '低于最低预警价格')
+        elif float(price_list[i]) >=  float(price_high_list[i]):
+            itchat.send(content + '高于最高预警价格', toUserName='filehelper')
+            print(content + '高于最高预警价格')
+        else:
+            print(content + '价格正常')
+    itchat.send('***** end *****', toUserName='filehelper')
+    print('***** end *****\n')
+
+
+def push(all_list = []):
+    itchat.send('Stock_WeChat 已开始执行！', toUserName='filehelper')
+    print('Stock_WeChat 已开始执行！')
+    while True:
+        try:
+            get_push(all_list)
+            time.sleep(2.9)
         except KeyboardInterrupt:
             itchat.send('Stock_WeChat 已执行完毕！\n'
                 '更多有意思的小玩意，请戳---->\n'
@@ -55,27 +91,13 @@ def push(stock_symbol, price_low, price_high):
             break
 
 
-# 超过预警价格发送提示
-def remind(stock_symbol, price_low, price_high):
-    while True:   
-        try:   
-            time = datetime.datetime.now()    # 获取当前时间
-            now = time.strftime('%H:%M:%S') 
-            data = ts.get_realtime_quotes(stock_symbol)    # 获取股票信息
-            r1 = float(data['price'])
-            r2 = str(stock_symbol) + ' 的当前价格为 ' + str(r1)
-            content = now + '\n' + r2
-            print(content)
-            # 判断并发送预警信息
-            if r1 <= float(price_low):
-                itchat.send('低于最低预警价格', toUserName='filehelper')
-                print('低于最低预警价格')
-            elif r1 >= float(price_high):
-                itchat.send('高于最高预警价格', toUserName='filehelper')
-                print('高于最高预警价格')
-            else:
-                print('价格正常')
-            t.sleep(2.9)
+def remind(all_list = []):
+    itchat.send('Stock_WeChat 已开始执行！', toUserName='filehelper')
+    print('Stock_WeChat 已开始执行！')
+    while True:
+        try:
+            get_remind(all_list)
+            time.sleep(2.9)
         except KeyboardInterrupt:
             itchat.send('Stock_WeChat 已执行完毕！\n'
                 '更多有意思的小玩意，请戳---->\n'
@@ -86,7 +108,5 @@ def remind(stock_symbol, price_low, price_high):
                 '更多有意思的小玩意，请戳---->\n'
                 '[https://github.com/ipreacher/tricks]')
             break
-
-
 
 

@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'Stock_WeChat',
-    version = '0.0.9',
+    version = '0.1.2',
     keywords = ('stock', 'WeChat'),
     description = 'Set up WeChat reminder of a targeted stock',
     classifiers=[
