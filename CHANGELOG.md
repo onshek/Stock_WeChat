@@ -10,4 +10,4 @@
 
 0.1.2
 * 2017-02-25
-* Add functions
+* New release
