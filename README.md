@@ -4,6 +4,7 @@
 
 This package supports only Python 3.x.
 
+如果这些对你有帮助，不妨通过 [微信](http://ol5pvu2w5.bkt.clouddn.com/wechat.JPG) 或 [支付宝](http://ol5pvu2w5.bkt.clouddn.com/Alipay.JPG) 对我打赏.
 
 ## Installation
 
